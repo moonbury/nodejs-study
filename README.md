@@ -1,6 +1,6 @@
 #### This project demostartes the use of NodeJs to create a web service backend.
 
-To started, download the data from [www.gutenberg.org](http://www.gutenberg.org/cache/epub/feeds/rdf-files.tar.bz2). Extract it and use the esclu to add selected data to elasticsearch. b4 is the web service for play with the data.
+To started, download the data from [www.gutenberg.org](http://www.gutenberg.org/cache/epub/feeds/rdf-files.tar.bz2). Extract it and use the esclu to add selected data to elasticsearch. b4 is the web service and b4-app is the web UI.
 
 Book API
 * retrieve the api version
