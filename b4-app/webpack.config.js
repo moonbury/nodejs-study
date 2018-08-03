@@ -6,15 +6,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './entry.js',
+  //entry: './entry.js',
+  entry: './app/index.ts',
   output: {
     filename: 'bundle.js',
     path: distDir,
   },
   devServer: {
-    // .. rest of devserver options
-
-    host: '0.0.0.0',
+    host: '0.0.0.0',   //use 0.0.0.0 for pixel book development.
     port: 60800,
     contentBase: distDir,
     disableHostCheck: true
@@ -30,8 +29,11 @@ module.exports = {
   ],
   module: {
     rules: [{
+      test: /\ts$/,
+      loader: 'ts-loader',
+    }, {
       test: /\.css$/,
-      use: ['style-loader','css-loader']
+      use: ['style-loader', 'css-loader']
     }, {
       test: /\.(png|woff|woff2|eot|ttf|svg)$/,
       loader: 'url-loader?limit:10000',
