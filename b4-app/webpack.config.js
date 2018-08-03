@@ -16,7 +16,14 @@ module.exports = {
     host: '0.0.0.0',   //use 0.0.0.0 for pixel book development.
     port: 60800,
     contentBase: distDir,
-    disableHostCheck: true
+    disableHostCheck: true,
+    proxy: {
+      '/api': 'http://localhost:60702',
+      '/es': {
+        target: 'http://localhost:9200',
+        pathRewrite: {'^/es': ''},
+      }
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
