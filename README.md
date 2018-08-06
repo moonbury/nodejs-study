@@ -1,4 +1,4 @@
-#### This project demostartes the use of NodeJs to create a web service backend.
+#### This project is the result of my learning of NodeJs, the final product is the web service backend under the ux folder.
 
 To started, download the data from [www.gutenberg.org](http://www.gutenberg.org/cache/epub/feeds/rdf-files.tar.bz2). Extract it and use the esclu to add selected data to elasticsearch. b4 is the web service and b4-app is the web UI. First, start the b4 webservice and it will serve in 60702 port. Then start the b4-app that serve on 60800 port.
 
