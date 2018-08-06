@@ -21,6 +21,26 @@ alertsElement.innerHTML = templates.alert({
 });
 */
 
+  /* delete a bundle */
+  const deleteBundle = async (bundleId) => {
+    try {
+      //delete bundles
+
+      const bundles = await getBundles();
+
+      const url = `/api/bundle/${encodeURIComponent(bundleId)}`;
+      console.log(url);
+      const res = await fetch(url, { method: 'DELETE' });
+      const resBody = await res.json();
+
+      bundles.splice(bundleId, 1);
+      listBundles(bundles);
+      showAlert('Bundle deleted','success');
+
+    } catch(err) {
+      showAlert(err);
+    }
+  };
 
 /* add a bundle */
 const addBundle = async (name) => {
@@ -65,6 +85,15 @@ const listBundles = bundles => {
     const name = form.querySelector('input').value;
     addBundle(name);
   });
+
+
+  const deleteButtons = mainElement.querySelectorAll('button.delete');
+  for (let i = 0; i < deleteButtons.length; i++) {
+    const deleteButton = deleteButtons[i];
+    deleteButton.addEventListener('click', event => {
+      deleteBundle(deleteButton.getAttribute('data-bundle-id'));
+    });
+  }
 };
 
 

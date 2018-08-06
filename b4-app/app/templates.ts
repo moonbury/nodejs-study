@@ -12,6 +12,11 @@ export const main = Handlebars.compile(`
 export const welcome = Handlebars.compile(`<div class="jumbotron">
 <h1>Welcome</h1>
 <p>B4 is an application for books</p>
+<p>
+  <a href="#list-bundles" class="btn btn-primary btn-lg">
+    Go to bundle list
+  </a>
+</p>
 </div>
 `);
 
