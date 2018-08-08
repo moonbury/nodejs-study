@@ -1,9 +1,16 @@
 {
-  "serviceUrl": "http://b4.example.com:60900",
+  "serviceUrl": "http://penguin.linux.test:60900",  
+  "auth": {
+    "facebook": {
+      "appID": "2121698071437553",
+      "appSecret": "ab14e6bbc6278a8546e5d4fe66d1efa3"
+    }
+  },
   "es": {
     "host": "localhost",
     "port": 9200,
     "books_index": "books",
     "bundles_index": "b4"
   }
+
 }

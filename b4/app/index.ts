@@ -7,12 +7,27 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 import * as templates from './templates.ts';
 
+
+/*
+fetch and decode json
+*/
+
+const fetchJSON = async (url, method = 'GET') => {
+  try {
+    const response = await fetch(url, { method, credentials: 'same-origin' });
+
+    return response.json();
+  } catch (error) {
+    return (error);
+  }
+};
+
 /**
  * Show an alert to the user.
  */
 const showAlert = (message, type = 'danger') => {
   const alertsElement = document.body.querySelector('.b4-alerts');
-  const html = templates.alert({type, message});
+  const html = templates.alert({ type, message });
   alertsElement.insertAdjacentHTML('beforeend', html);
 };
 
@@ -25,8 +40,11 @@ const showView = async () => {
 
   switch (view) {
     case '#welcome':
-      const session = {};
-      mainElement.innerHTML = templates.welcome({session});
+      const session = await fetchJSON('/api/session');
+      mainElement.innerHTML = templates.welcome({ session });
+      if (session.error) {
+        showAlert(session.error);
+      }
       break;
     default:
       // Unrecognized view.
@@ -36,8 +54,8 @@ const showView = async () => {
 
 // Page setup.
 (async () => {
-  const session = {};
-  document.body.innerHTML = templates.main({session});
+  const session = await fetchJSON('/api/session');
+  document.body.innerHTML = templates.main({ session });
   window.addEventListener('hashchange', showView);
   showView().catch(err => window.location.hash = '#welcome');
 })();

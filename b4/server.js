@@ -75,4 +75,40 @@ if (isDev) {
   app.use(express.static('dist'));
 }
 
+const passport = require('passport');
+passport.serializeUser((profile, done) => done(null, {
+  id: profile.id,
+  provider: profile.provider,
+}));
+passport.deserializeUser((user, done) => done(null, user));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/api/session', (req, res) => {
+  const session = {
+    auth: req.isAuthenticated()
+  };
+  res.status(200).json(session);
+});
+
+const FacebookStrategy = require('passport-facebook').Strategy;
+passport.use(new FacebookStrategy({
+  clientID: nconf.get('auth:facebook:appID'),
+  clientSecret: nconf.get('auth:facebook:appSecret'),
+  callbackURL: new URL('/auth/facebook/callback', serviceUrl).href,
+
+}, (accessToken, refreshToken, profile, done) => done(null, profile)));
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  successRedirect: '/',
+  failureRedirect: '/',
+}));
+
+
+app.get('/auth/signout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
 app.listen(servicePort, () => console.log('Ready.'));

@@ -16,6 +16,14 @@ export const main = Handlebars.compile(`
       </div>
       <!-- Insert navbar here. -->
     </div><!-- /.container-fluid -->
+    {{#if session.auth}}
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#list-bundles">My Bundles</a></li>
+        <li><a href="/auth/signout">Sign Out</a></li>
+      </ul>
+    </div>
+    {{/if}}
   </nav>
   <div class="container">
     <div class="b4-alerts"></div>
